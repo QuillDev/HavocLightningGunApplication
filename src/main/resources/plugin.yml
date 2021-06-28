@@ -1,0 +1,9 @@
+name: LightningGun
+version: ${project.version}
+main: moe.quill.lightninggun.LightningGun
+api-version: 1.17
+
+commands:
+  lightninggun:
+    usage: /<command>
+    description: Gives a lightning gun to the player who executed it.
