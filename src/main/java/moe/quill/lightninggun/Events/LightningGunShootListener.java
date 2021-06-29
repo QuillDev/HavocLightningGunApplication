@@ -56,7 +56,6 @@ public class LightningGunShootListener implements Listener {
     }
 
     public void processUseEvent(Player player, Cancellable event) {
-        event.setCancelled(true);
         final var heldItem = player.getInventory().getItemInMainHand();
 
         //If it isn't bricks just exit out
@@ -72,6 +71,7 @@ public class LightningGunShootListener implements Listener {
         final var targetLocation = targetBlock.getLocation();
 
         useLightningGun(player, targetLocation, 1);
+        event.setCancelled(true);
     }
 
     /**
