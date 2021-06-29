@@ -70,8 +70,10 @@ public class LightningGunShootListener implements Listener {
         if (targetBlock == null) return;
         final var targetLocation = targetBlock.getLocation();
 
-        useLightningGun(player, targetLocation, 1);
         event.setCancelled(true);
+
+        useLightningGun(player, targetLocation, 1);
+
     }
 
     /**
