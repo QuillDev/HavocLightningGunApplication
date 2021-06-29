@@ -4,9 +4,12 @@ import moe.quill.lightninggun.LightningEffect.LightningEffectData;
 import moe.quill.lightninggun.LightningEffect.LightningEffectManager;
 import org.bukkit.*;
 import org.bukkit.entity.*;
+import org.bukkit.event.Cancellable;
+import org.bukkit.event.Event;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
+import org.bukkit.event.player.PlayerEvent;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.EquipmentSlot;
@@ -39,7 +42,7 @@ public class LightningGunShootListener implements Listener {
         final var action = event.getAction();
         //Only allow right click actions as per the item description
         if (!(action.equals(Action.RIGHT_CLICK_AIR) || action.equals(Action.RIGHT_CLICK_BLOCK))) return;
-        processUseEvent(event.getPlayer());
+        processUseEvent(event.getPlayer(), event);
     }
 
     /**
@@ -49,10 +52,11 @@ public class LightningGunShootListener implements Listener {
      */
     @EventHandler
     public void playerUseLightningGun(PlayerInteractEntityEvent event) {
-        processUseEvent(event.getPlayer());
+        processUseEvent(event.getPlayer(), event);
     }
 
-    public void processUseEvent(Player player) {
+    public void processUseEvent(Player player, Cancellable event) {
+        event.setCancelled(true);
         final var heldItem = player.getInventory().getItemInMainHand();
 
         //If it isn't bricks just exit out
